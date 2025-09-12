@@ -1,0 +1,898 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUET Research Repository - For CUETians</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #1a4b8c;
+            --secondary: #2c6bc0;
+            --accent: #f39c12;
+            --light: #f5f7fa;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --danger: #e74c3c;
+            --gray: #7f8c8d;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #e67e22;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            padding: 80px 0;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 60px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary);
+        }
+        .section-title h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        /* Papers Section */
+        .papers {
+            padding: 60px 0;
+            background: #f8f9fa;
+        }
+
+        .paper-filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .papers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .paper-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .paper-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .paper-content {
+            padding: 20px;
+        }
+
+        .paper-category {
+            display: inline-block;
+            padding: 5px 12px;
+            background: var(--light);
+            color: var(--primary);
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+        }
+
+        .paper-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .paper-author {
+            color: var(--gray);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .paper-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .download-btn {
+            background: var(--success);
+            color: white;
+            border: none;
+        }
+
+        .delete-btn {
+            background: var(--danger);
+            color: white;
+            border: none;
+        }
+
+        /* Researchers Section */
+        .researchers {
+            padding: 60px 0;
+            background: white;
+        }
+
+        .researchers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .researcher-card {
+            background: var(--light);
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .researcher-card:hover {
+            transform: translateY(-5px);
+        }
+        .researcher-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 20px auto 15px;
+            border: 3px solid white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .researcher-content {
+            padding: 20px;
+        }
+
+        .researcher-name {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .researcher-department {
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .researcher-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        /* Upload Section */
+        .upload {
+            padding: 60px 0;
+            background: #f8f9fa;
+        }
+
+        .upload-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo span {
+            color: var(--accent);
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            color: #bdc3c7;
+        }
+
+        .footer-links h3, .footer-contact h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-links h3::after, .footer-contact h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-contact p {
+            margin-bottom: 10px;
+            color: #bdc3c7;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+/* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h1>CUET <span>Research</span></h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#papers">Research Papers</a></li>
+                        <li><a href="#researchers">Researchers</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#upload">Upload</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline">Login</button>
+                    <button class="btn btn-primary">Register</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h2>CUET Research Repository</h2>
+                <p>Exclusive platform for CUET students and researchers to share, discover, and collaborate on research papers</p>
+                <button class="btn btn-primary">Explore Papers</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Use Our Repository</h2>
+                <p>Designed specifically for CUETians to foster academic growth and research collaboration</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3>Research Papers</h3>
+                    <p>Access a wide range of research papers published by CUET students and faculty members</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3>Researchers Profile</h3>
+                    <p>Connect with researchers, view their profiles, and explore their publications</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <h3>Categories</h3>
+                    <p>Organized categories make it easy to find papers in your field of interest</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <h3>Upload System</h3>
+                    <p>Easily upload, download, and manage your research papers with our intuitive system</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Papers Section -->
+    <section class="papers" id="papers">
+<div class="container">
+            <div class="section-title">
+                <h2>Recent Research Papers</h2>
+                <p>Explore the latest research contributions from CUET community</p>
+            </div>
+            <div class="paper-filters">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Arch</button>
+                <button class="filter-btn">CSE</button>
+                <button class="filter-btn">EEE</button>
+                <button class="filter-btn">ME</button>
+                <button class="filter-btn">CE</button>
+                <button class="filter-btn">ETE</button>
+                <button class="filter-btn">MIE</button>
+                <button class="filter-btn">BME</button>
+                <button class="filter-btn">PME</button>
+                <button class="filter-btn">MME</button>
+                <button class="filter-btn">WRE</button>
+                <button class="filter-btn">URP</button>
+                
+            </div>
+            <div class="papers-grid">
+                <div class="paper-card">
+                    <div class="paper-content">
+                        <span class="paper-category">Computer Science</span>
+                        <h3 class="paper-title">Machine Learning Approaches for Network Security</h3>
+                        <div class="paper-author">
+                            <i class="fas fa-user"></i>
+                            <span>Dr. Ahmed Rahman</span>
+                        </div>
+                        <p>This paper explores innovative ML techniques for enhancing cybersecurity measures in enterprise networks.</p>
+                        <div class="paper-actions">
+                            <button class="action-btn download-btn">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                            <button class="action-btn">
+                                <i class="fas fa-eye"></i> View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="paper-card">
+                    <div class="paper-content">
+                        <span class="paper-category">Electrical Engineering</span>
+                        <h3 class="paper-title">Renewable Energy Integration in Power Systems</h3>
+                        <div class="paper-author">
+                            <i class="fas fa-user"></i>
+                            <span>Prof. Fatima Jahan</span>
+                        </div>
+                        <p>Analysis of challenges and solutions for integrating renewable energy sources into national power grid.</p>
+                        <div class="paper-actions">
+                            <button class="action-btn download-btn">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                            <button class="action-btn">
+                                <i class="fas fa-eye"></i> View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="paper-card">
+                    <div class="paper-content">
+                        <span class="paper-category">Civil Engineering</span>
+                        <h3 class="paper-title">Sustainable Building Materials for Urban Development</h3>
+                        <div class="paper-author">
+                            <i class="fas fa-user"></i>
+                            <span>Dr. Mohammad Ali</span>
+                        </div>
+                        <p>Evaluation of eco-friendly construction materials and their impact on urban sustainability.</p>
+                        <div class="paper-actions">
+                            <button class="action-btn download-btn">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                            <button class="action-btn">
+                                <i class="fas fa-eye"></i> View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Researchers Section -->
+    <section class="researchers" id="researchers">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Researchers</h2>
+                <p>Connect with leading researchers from CUET community</p>
+            </div>
+            <div class="researchers-grid">
+                <div class="researcher-card">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Researcher" class="researcher-img">
+                    <div class="researcher-content">
+                        <h3 class="researcher-name">Dr. Ahmed Rahman</h3>
+                        <div class="researcher-department">Computer Science & Engineering</div>
+                        <p>Specializes in Machine Learning, Cybersecurity, and Network Systems</p>
+                        <div class="researcher-stats">
+                            <div class="stat">
+                                <div class="stat-value">24</div>
+                                <div class="stat-label">Papers</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">184</div>
+                                <div class="stat-label">Citations</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">6</div>
+                                <div class="stat-label">Projects</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                               <div class="researcher-card">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Researcher" class="researcher-img">
+                    <div class="researcher-content">
+                        <h3 class="researcher-name">Dr. Ahmed Rahman</h3>
+                        <div class="researcher-department">Computer Science & Engineering</div>
+                        <p>Specializes in Machine Learning, Cybersecurity, and Network Systems</p>
+                        <div class="researcher-stats">
+                            <div class="stat">
+                                <div class="stat-value">24</div>
+                                <div class="stat-label">Papers</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">184</div>
+                                <div class="stat-label">Citations</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">6</div>
+                                <div class="stat-label">Projects</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="researcher-card">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Researcher" class="researcher-img">
+                    <div class="researcher-content">
+                        <h3 class="researcher-name">Prof. Fatima Jahan</h3>
+                        <div class="researcher-department">Electrical & Electronic Engineering</div>
+                        <p>Focuses on Power Systems, Renewable Energy, and Smart Grid Technologies</p>
+                        <div class="researcher-stats">
+                            <div class="stat">
+                                <div class="stat-value">18</div>
+                                <div class="stat-label">Papers</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">132</div>
+                                <div class="stat-label">Citations</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">4</div>
+                                <div class="stat-label">Projects</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="researcher-card">
+                    <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Researcher" class="researcher-img">
+                    <div class="researcher-content">
+                        <h3 class="researcher-name">Dr. Mohammad Ali</h3>
+                        <div class="researcher-department">Civil Engineering</div>
+                        <p>Research interests include Sustainable Materials and Urban Infrastructure Development</p>
+                        <div class="researcher-stats">
+                            <div class="stat">
+                                <div class="stat-value">16</div>
+                                <div class="stat-label">Papers</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">98</div>
+                                <div class="stat-label">Citations</div>
+
+</div>
+                            <div class="stat">
+                                <div class="stat-value">5</div>
+                                <div class="stat-label">Projects</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload Section -->
+    <section class="upload" id="upload">
+        <div class="container">
+            <div class="section-title">
+                <h2>Upload Research Paper</h2>
+                <p>Share your research with the CUET community</p>
+            </div>
+            <div class="upload-form">
+                <div class="form-group">
+                    <label for="title">Paper Title</label>
+                    <input type="text" id="title" class="form-control" placeholder="Enter paper title">
+                </div>
+                <div class="form-group">
+                    <label for="abstract">Abstract</label>
+                    <textarea id="abstract" class="form-control" placeholder="Provide a brief abstract of your research"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category" class="form-control">
+                        <option value="">Select Category</option>
+                        <option value="cs">Computer Science & Engineering</option>
+                        <option value="eee">Electrical & Electronic Engineering</option>
+                        <option value="ce">Civil Engineering</option>
+                        <option value="me">Mechanical Engineering</option>
+                        <option value="arch">Architecture</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="authors">Authors</label>
+                    <input type="text" id="authors" class="form-control" placeholder="Enter author names separated by commas">
+                </div>
+                <div class="form-group">
+                    <label for="file">Upload PDF</label>
+                    <input type="file" id="file" class="form-control" accept=".pdf">
+                </div>
+                <button class="btn btn-primary" style="width: 100%;">Upload Paper</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">CUET <span>Research</span></div>
+                    <p>Exclusive research repository for CUET students and faculty members. fostering academic growth and collaboration.</p>
+                    <p>© 2023 CUET Research Repository. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#papers">Research Papers</a></li>
+                        <li><a href="#researchers">Researchers</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#upload">Upload Paper</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> CUET, Raozan, Chattogram, Bangladesh</p>
+                    <p><i class="fas fa-envelope"></i> research@cuet.ac.bd</p>
+                    <p><i class="fas fa-phone"></i> +880 123 456 789</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>Made with <i class="fas fa-heart" style="color: #e74c3c;"></i> for CUETians</p>
+            </div>
+        </div>
+    </footer>
+
+<script>
+        // Simple JavaScript for interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filter buttons
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    // Here you would filter the papers based on category
+                });
+            });
+            
+            // Simulate download button action
+            const downloadButtons = document.querySelectorAll('.download-btn');
+            downloadButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    alert('Download functionality would be implemented with backend system');
+                });
+            });
+            
+            // Simulate upload form submission
+            const uploadForm = document.querySelector('.upload-form');
+            uploadForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Paper upload functionality would be implemented with backend system');
+            });
+        });
+    </script>
+</body>
+</html>
